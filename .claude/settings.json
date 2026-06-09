@@ -1,0 +1,25 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "type": "command",
+        "command": "echo '🎯 ClickUp Dev Workflow loaded. Say \"show my tickets\" to see open work.'"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "type": "command",
+        "command": "echo '[Hook] File edited. Remember to update your ClickUp ticket status if work state changed.'",
+        "matcher": {
+          "tool_name": "Write"
+        }
+      }
+    ],
+    "Stop": [
+      {
+        "type": "command",
+        "command": "echo '[Hook] Session ending. Did you update your ClickUp ticket status?'"
+      }
+    ]
+  }
+}
