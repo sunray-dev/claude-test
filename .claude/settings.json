@@ -2,14 +2,14 @@
   "hooks": {
     "SessionStart": [
       {
-        "type": "command",
-        "command": "echo '🎯 ClickUp Dev Workflow loaded. Say \"show my tickets\" to see open work.'"
+        "type": "prompt",
+        "prompt": "User is starting a new session. Automatically fetch unstarted tasks from ClickUp backlog (list ID: 901523813899), display them ordered by priority (urgent → high → normal → low), and ask which ticket they want to work on."
       }
     ],
     "PostToolUse": [
       {
-        "type": "command",
-        "command": "echo '[Hook] File edited. Remember to update your ClickUp ticket status if work state changed.'",
+        "type": "prompt",
+        "prompt": "A file was just edited. Remind the user to update their ClickUp ticket status if their work state has changed.",
         "matcher": {
           "tool_name": "Write"
         }
@@ -17,8 +17,8 @@
     ],
     "Stop": [
       {
-        "type": "command",
-        "command": "echo '[Hook] Session ending. Did you update your ClickUp ticket status?'"
+        "type": "prompt",
+        "prompt": "The session is ending. Ask the user if they have updated their ClickUp ticket status and added a progress comment."
       }
     ]
   }
