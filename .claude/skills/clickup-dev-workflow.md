@@ -175,43 +175,6 @@ When developer says: "what's the status", "show open tickets", "what's in progre
 
 ---
 
-## Hooks Configuration (settings.json)
-
-Place this in your project root at `.claude/settings.json`:
-
-```json
-{
-  "hooks": {
-    "SessionStart": [
-      {
-        "type": "command",
-        "command": "echo '🎯 ClickUp Dev Workflow loaded. Say \"show my tickets\" to see open work.'"
-      }
-    ],
-    "PostToolUse": [
-      {
-        "type": "command",
-        "command": "echo '[Hook] File edited. Remember to update your ClickUp ticket status if work state changed.'",
-        "matcher": {
-          "tool_name": "Write"
-        }
-      }
-    ],
-    "Stop": [
-      {
-        "type": "command",
-        "command": "echo '[Hook] Session ending. Did you update your ClickUp ticket status?'"
-      }
-    ]
-  }
-}
-```
-
-> These hooks are gentle reminders. For full automation (auto-updating ClickUp on git push),
-> see the webhook middleware setup in your Claude Test ClickUp doc.
-
----
-
 ## Branch Naming Convention
 
 Use this convention so hooks and middleware can extract ticket IDs automatically:
@@ -229,33 +192,3 @@ Examples:
 
 ---
 
-## Quality Checklist (Before Moving to In Review)
-
-Claude Code should verify these before allowing a ticket to move to In Review:
-
-- [ ] Code changes are saved and committed
-- [ ] Tests written for new functionality
-- [ ] Existing tests still passing (`npm test` or `pytest`)
-- [ ] No hardcoded secrets or API keys in code
-- [ ] Branch pushed to remote
-- [ ] PR created and linked
-
-If any item is unchecked, remind the developer and offer to help resolve it before moving status.
-
----
-
-## MCP Configuration (claude_desktop_config.json or .mcp.json)
-
-To use ClickUp MCP in Claude Code, add to your MCP config:
-
-```json
-{
-  "mcpServers": {
-    "clickup": {
-      "type": "url",
-      "url": "https://mcp.clickup.com/mcp",
-      "note": "Requires ClickUp OAuth — authenticate via claude.ai Connectors first"
-    }
-  }
-}
-```
